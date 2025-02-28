@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    tr, th, td{
+        border: 1px, solid, black;
+    }
+    .clickable {
+        width:100%;
+        border:0px;
+    }
+    .clickable:hover{
+        background-color: greenyellow;
+    }
+</style>
+<body>
+<div class="displayAvailableGameRooms">
+    <form id = "displayGameRooms">
+        <button type = "submit">Display available rooms</button>
+    </form>
+</div>
+<div id="availableGameRooms" style = "display:none">
+ <p id="status">cos</p>
+ <table  >
+    <thead id ="roomsListH"></thead>
+    <tbody  id="roomsList"></tbody>
+ </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.2/dist/sockjs.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/waitingRoom.js"></script>
+</body>
+</html>

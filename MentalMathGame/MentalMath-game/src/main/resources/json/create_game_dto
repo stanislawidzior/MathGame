@@ -1,0 +1,16 @@
+{
+  "player": {
+    "id": "player123",
+    "name": "John Doe",
+    "questionCounter": 5,
+    "active": true
+  },
+  "gameSettingsDto": {
+    "questionAmount": 10,
+    "allowedOperations": ["addition", "subtraction", "multiplication"],
+    "minNumber": 1,
+    "maxNumber": 100,
+    "minQuestionNumber": 0,
+    "maxQuestionNumber": 100
+  }
+}

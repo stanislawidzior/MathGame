@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    tr, th, td{
+        border: 1px, solid, black;
+    }
+    .clickable {
+        width:100%;
+        border:0px;
+    }
+    .clickable:hover{
+        background-color: greenyellow;
+    }
+</style>
+<body>
+<div class="displayAvailableGameRooms">
+    <form id = "displayGameRooms">
+        <button type = "submit">Display available rooms</button>
+    </form>
+</div>
+<div id="availableGameRooms" style = "display:none ;">
+    <div class="createGame"><button id = "displayCreateGame">create game</button></div>
+    <div id="createGameForm" style="display:none ;">
+    <form  >
+        <label for="userName">username</label>
+        <input type="text" name = "userName" id = "userName">
+        <label for="questionAmount">question amount</label>
+        <input type="number" name="questionAmount" id="questionAmount">
+        <div class="checkboxes">
+        <input type="checkbox" id="addition" name="addition" value="addition">
+        <label for="addition"> addition</label>
+        <input type="checkbox" id="subtraction" name="subtraction" value="subtraction">
+        <label for="subtraction">subtraction</label>
+        <input type="checkbox" id="multiplication" name="multiplication" value="multiplication">
+        <label for="multiplication"> multiplication</label>
+            <input type="checkbox" id="division" name="division" value="division">
+            <label for="division"> division</label>
+
+        </div>
+        <select name="difficulty" id="difficulty">
+            <option value="easy">easy</option>
+            <option value="normal">easy</option>
+            <option value="hard">easy</option>
+        </select>
+        <div><button id = "submitGame">create</button></div>
+    </form>
+        </div>
+ <p id="status">cos</p>
+ <table  >
+    <thead id ="roomsListH"></thead>
+    <tbody  id="roomsList"></tbody>
+ </table>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1.5.2/dist/sockjs.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+<script src="/js/waitingRoom.js"></script>
+</body>
+</html>

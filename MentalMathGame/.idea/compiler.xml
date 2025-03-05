@@ -7,6 +7,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="mathGame" />
         <module name="MentalMath-game" />
         <module name="MentalMath-api" />
         <module name="MentalMath-data" />
@@ -18,6 +19,7 @@
       <module name="MentalMath-api" options="-parameters" />
       <module name="MentalMath-data" options="-parameters" />
       <module name="MentalMath-game" options="-parameters" />
+      <module name="mathGame" options="-parameters" />
     </option>
   </component>
 </project>

@@ -4,6 +4,7 @@ package com.personalprojectspjatk.mentalmathgame.service;
 
 import com.personalprojectspjatk.mentalmathgame.contract.*;
 import com.personalprojectspjatk.mentalmathgame.excpetions.GameException;
+import com.personalprojectspjatk.mentalmathgame.excpetions.GameNotFoundException;
 import com.personalprojectspjatk.mentalmathgame.excpetions.NoRoomsAvailableException;
 import com.personalprojectspjatk.mentalmathgame.gameSession.GameSession;
 import org.springframework.stereotype.Service;
@@ -47,11 +48,11 @@ public class GameSessionService {
         return false;
    }
 
-    public int joinExistingGame(int gameId, GamePlayer player) throws Exception {
+    public int joinExistingGame(int gameId, GamePlayer player) throws GameNotFoundException {
         GameSession gameSession = activeGames.get(gameId);
 
         if (gameSession == null) {
-            throw new GameException("Game of id " + gameId +" not found!");
+            throw new GameNotFoundException("Game of id " + gameId +" not found!");
         }
 
         gameSession.addPlayer(player);

@@ -10,7 +10,9 @@ const availableGameRooms = document.getElementById('availableGameRooms');
 const statusField = document.getElementById('status');
 const roomsList = document.getElementById('roomsList');
 const roomsListH = document.getElementById('roomsListH');
-
+const createGameButton = document.getElementById("createGame");
+const displayCreateGameFormButton = document.getElementById("displayCreateGame");
+const createGameForm = document.getElementById("createGameForm");
 function display_table_row(parsed, rownum){
     for(let key in  parsed){
         let row = roomsList.insertRow();
@@ -36,9 +38,9 @@ function display_table_row(parsed, rownum){
 function display_table(message){
     roomsList.innerHTML = "";
    let parsed = JSON.parse(message.body);
-   console.log(parsed);
+   console.log("parsed "+parsed);
    if(parsed.hasOwnProperty("body")){
-    console.log(parsed[body]);
+    statusField.innerText = parsed["body"];
    }else{
    let row = roomsListH.insertRow();
    let th = document.createElement("th");
@@ -112,5 +114,14 @@ function sendMessageWs(destination, message){
     stompClient.send(destination,{}, message);
 }
 
+function createNewGame(){
+
+}
+function displayCreateGameForm(){
+     event.preventDefault();
+    document.getElementById("createGameForm").style.display = "block";
+ }
+
 
 displayGameRooms.addEventListener('submit', connect, true)
+displayCreateGameFormButton.addEventListener('click', displayCreateGameForm, true);

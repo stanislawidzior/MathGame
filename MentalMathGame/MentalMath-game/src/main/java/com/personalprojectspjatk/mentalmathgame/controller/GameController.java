@@ -1,5 +1,6 @@
 package com.personalprojectspjatk.mentalmathgame.controller;
 
+import com.personalprojectspjatk.mentalmathgame.excpetions.GameNotFoundException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.Response;
@@ -27,10 +28,14 @@ public class GameController {
 
     @MessageExceptionHandler(NoRoomsAvailableException.class)
     @SendTo("/game/rooms")
-    public ResponseEntity gameException(NoRoomsAvailableException e){
+    public ResponseEntity noGameRooms(NoRoomsAvailableException e){
         return ResponseEntity.ok(e.getMessage());
     }
-
+    @MessageExceptionHandler(GameNotFoundException.class)
+    @SendToUser("/game/rooms")
+    public ResponseEntity gameRoomNotFound(GameNotFoundException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
     @MessageMapping("/game.hello")
     @SendTo("/game/welcome")
     public String hello(@Payload String message){
@@ -49,6 +54,17 @@ public class GameController {
         var id = gameSessionService.createNewGame(createGameDto.getGameSettingsDto(),createGameDto.getPlayer());
         simpMessagingTemplate.convertAndSend("/game/rooms",gameSessionService.getAvailableGameRooms());
         return new RoomMessage(id,"created a game room with id: " + id +" user id =" + sessionId);
+    }
+    @MessageMapping("/game/rooms/join")
+    @SendToUser("/game")
+    public RoomMessage joinExistingGame(@Header("simpSessionId") String sessionId, @Payload JoinGameDto join) throws GameNotFoundException{
+        try {
+            var id = gameSessionService.joinExistingGame(join.getRoomId(), new GamePlayer(sessionId, join.getUserName(), 0));
+        }catch(GameNotFoundException e){
+            throw e;
+        }
+        simpMessagingTemplate.convertAndSend("/game/rooms/" + join.getRoomId(), gameSessionService.getGameStateForGame(join.getRoomId()));
+        return new RoomMessage(join.getRoomId(), "Joined");
     }
 
 //    @MessageMapping("/game/rooms/{roomid}/status")

@@ -1,9 +1,6 @@
-package com.personalprojectspjatk.mentalmathgame.contract;
+package com.personalprojectspjatk.mentalmathgame.model;
 
-import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 
 @EqualsAndHashCode
 
@@ -12,10 +9,15 @@ public class GamePlayer {
     private String name;
     private int questionCounter;
     private boolean active = true;
+    private int gameId;
     public GamePlayer(String id, String name, int questionCounter) {
         this.id = id;
         this.name = name;
         this.questionCounter = questionCounter;
+    }
+
+    public GamePlayer() {
+
     }
 
     public void setQuestionCounter(int questionCounter) {

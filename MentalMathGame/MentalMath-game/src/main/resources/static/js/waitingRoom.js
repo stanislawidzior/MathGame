@@ -1,6 +1,13 @@
+import{
+    wsUrl,
+    connectWS,
+    sendMessageWs,
+    subscribeWs
+} from "./common";
 
 const wsUrl = "localhost:8080/ws";
 const gameRoomsReceiveDestination = "/game/rooms";
+const gameRoomsUserSpecificReceiveDestination = "/user/game/rooms"
 const gameRoomsSendDestination = "/app/game/rooms";
 let stompClient = null;
 let nickname = null;
@@ -62,7 +69,9 @@ function display_table(message){
 var connect_callback = function() {
     statusField.innerText = "available games";
     subscribeWs(gameRoomsReceiveDestination);
+    subscribeWs(gameRoomsUserSpecificReceiveDestination);
     sendMessageWs(gameRoomsSendDestination);
+    sendMessageWs("/app/game/register", "gracz");
    };
  var error_callback = function(error) {
    alert(error.headers.message);
@@ -78,10 +87,7 @@ var connect_callback = function() {
         console.log("received an empty message");
     }
 }
-function joinGame(gameId){
-    sessionStorage.setItem("gameId",gameId);
-    window.location.href = "../game.html";
-}
+/*
 function connect(){
     availableGameRooms.style.display = "block";
     connectWS();
@@ -104,7 +110,7 @@ function subscribeWs(name){
         console.log("subscribe error");
         return;
     }
-    subscription = stompClient.subscribe(name, subscribe_callback);
+    stompClient.subscribe(name, subscribe_callback);
 }
 function sendMessageWs(destination, message){
     event.preventDefault();
@@ -114,6 +120,15 @@ function sendMessageWs(destination, message){
     stompClient.send(destination,{}, message);
 }
 
+ */
+/*
+Store game ID in session for redirection to display the proper room id, the room id in the backend is determined by WebSocketSession
+ */
+function joinGame(gameId){
+    sessionStorage.setItem("gameId",gameId);
+    window.location.href = "../game.html";
+
+}
 function createNewGame(){
 
 }
@@ -121,7 +136,56 @@ function displayCreateGameForm(){
      event.preventDefault();
     document.getElementById("createGameForm").style.display = "block";
  }
+ function sendCreateGameForm(){
+     event.preventDefault();
+    if(isEmptyFieldPresent()){
+     alert("fill all fields");
+     return;
+    }
+    var allowedOperations = [];
+    if(document.getElementById("addition").checked){
+        allowedOperations.push("addition");
+    }
+     if(document.getElementById("multiplication").checked){
+         allowedOperations.push("multiplication");
+     }
+     if(document.getElementById("division").checked){
+         allowedOperations.push("division");
+     }
+     if(document.getElementById("subtraction").checked){
+         allowedOperations.push("subtraction");
+     }
+     console.log(allowedOperations);
+     var gameRequest = {
+         "playerName": document.getElementById("userName").value,
+         "gameSettingsDto": {
+         "questionAmount": document.getElementById("questionAmount").value,
+             "allowedOperations": allowedOperations,
+             "minNumber": 1,
+             "maxNumber": 100,
+             "minQuestionNumber": 0,
+             "maxQuestionNumber": 100
+     }
+     }
+    console.log(gameRequest);
 
+     sendMessageWs("/app/game/rooms/create", JSON.stringify(gameRequest));
+ }
+ //checkboxes validation yet to implement
+function isEmptyFieldPresent(){
+     var inputFields = document.getElementsByClassName("requiredField");
+     console.log(inputFields);
 
+     for(var field in inputFields){
+         console.log(field.type);
+             if(field.value === "") {
+
+                 console.log(field.type + "puste");
+                 return true;
+             }
+     }
+     return false;
+}
 displayGameRooms.addEventListener('submit', connect, true)
 displayCreateGameFormButton.addEventListener('click', displayCreateGameForm, true);
+ createGameForm.addEventListener("submit", sendCreateGameForm, true)

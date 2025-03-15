@@ -1,5 +1,6 @@
 package com.personalprojectspjatk.mentalmathgame.contract;
 
+import com.personalprojectspjatk.mentalmathgame.model.GamePlayer;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;

@@ -8,6 +8,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CreateGameDto {
-    GamePlayer player;
+    String playerName;
     GameSettingsDto gameSettingsDto;
 }

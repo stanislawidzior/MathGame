@@ -7,6 +7,7 @@ import com.personalprojectspjatk.mentalmathgame.excpetions.GameException;
 import com.personalprojectspjatk.mentalmathgame.excpetions.GameNotFoundException;
 import com.personalprojectspjatk.mentalmathgame.excpetions.NoRoomsAvailableException;
 import com.personalprojectspjatk.mentalmathgame.gameSession.GameSession;
+import com.personalprojectspjatk.mentalmathgame.model.GamePlayer;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

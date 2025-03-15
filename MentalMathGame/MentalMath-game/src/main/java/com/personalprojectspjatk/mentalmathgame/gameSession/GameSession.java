@@ -1,12 +1,11 @@
 package com.personalprojectspjatk.mentalmathgame.gameSession;
 
 
-import com.personalprojectspjatk.mentalmathgame.contract.GamePlayer;
+import com.personalprojectspjatk.mentalmathgame.model.GamePlayer;
 import com.personalprojectspjatk.mentalmathgame.contract.GameState;
 import com.personalprojectspjatk.mentalmathgame.contract.Question;
 import com.personalprojectspjatk.mentalmathgame.excpetions.GameException;
 import com.personalprojectspjatk.mentalmathgame.service.GameSetup;
-import org.springframework.stereotype.Service;
 
 import java.util.*;
 public class GameSession {

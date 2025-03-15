@@ -5,18 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="cde46d27-0bf9-49c9-ad28-765336c7b49c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/JoinGameDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/excpetions/GameNotFoundException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/excpetions/GamePlayerNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/service/RandomUserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/js/common.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MentalMath-game/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/CreateGameDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/CreateGameDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/GamePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/model/GamePlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/GameRoom.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/contract/GameRoom.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/gameSession/GameSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/gameSession/GameSession.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/service/GameSessionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/service/GameSessionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/html/game.html" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/game.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/html/main.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/js/waitingRoom.js" beforeDir="false" afterPath="$PROJECT_DIR$/MentalMath-game/src/main/resources/static/js/waitingRoom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tools/ws/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/tools/ws/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +27,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaScript File" />
         <option value="Class" />
       </list>
     </option>
@@ -86,6 +88,7 @@
       <recent name="C:\Users\stani\Downloads\Nowy folder\MathGame\MentalMathGame\MentalMath-game\src\main\resources" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\stani\Downloads\MathGame\MentalMathGame\MentalMath-game\src\main\resources\static" />
       <recent name="C:\Users\stani\Downloads\Nowy folder\MathGame\MentalMathGame\MentalMath-game\src\main\resources\static" />
     </key>
   </component>
@@ -143,11 +146,27 @@
       <workItem from="1740739967186" duration="713000" />
       <workItem from="1740993246652" duration="5210000" />
       <workItem from="1741207542729" duration="1744000" />
-      <workItem from="1741209330947" duration="303000" />
+      <workItem from="1741209330947" duration="3805000" />
+      <workItem from="1741531978862" duration="14741000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/MentalMath-game/src/main/java/com/personalprojectspjatk/mentalmathgame/controller/GameController.java</url>
+          <line>50</line>
+          <properties class="com.personalprojectspjatk.mentalmathgame.controller.GameController" method="registerUser">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

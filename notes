@@ -1,0 +1,44 @@
+1. polaczyc 3 moduly w jeden
+2. odpalic
+3. naprawic
+= poprawic settings
+
+zacząłem zmieniac uzywanie game settingsDto w Gamesetup zastapiłem przez game settings
+dokonczyc klase gamesettings: złapac expetion spowodowane zlym parsowaniem enuma
+
+zaimplementowac mechanizm reconecta, czyli  id przechowywane jako cookie, i wtedy wywalenie z sesji
+nastapi dopiero po jakims czasie, bo bedzie przechowywana wartosc ostatniej aktywnosci i na tej podstawie
+beda usuwani gracze.
+Zeby mozna bylo rejoinowac to: gracz bedzie przechowany w pokoju do konca trwania gry. czyli w momencie
+kiedy gracz sie rozlaczy i podlaczy ponownie prezsyla swoje id, sprawdzam wtedy czy znajduje sie jego id
+w mapie aktywnych graczy. a wiec gameplayer musi miec parametr, is playing. a po podlaczeniu ponownym po weryfikacji cookie
+czyli jesli cookie bylo aktywne po stronie uzytkownika to przesyla je jako parametr z unikalnym swoim kodem
+ten kod wtedy jest uzyty to sprawdzenia czy w hashmapie graczy jest taki kod. czyli to jedynie wymaga tego
+zeby tam zmienic z sessionId springowego na sessionId z cookie
+
+1. Rozpoczecie gry, niepozwalamy na dolaczanie nowych graczy, czyli flaga game started
+narazie po prostu niewyswiatlamy.
+
+Czyszcze klase gameSession.
+Zastanawiam sie po co sprawdziac czy game is over. ta metoda powinna nazywac sie isAllPlayersAnswered, flaga finished
+
+set active, powinno przejs na wyzszy poziom abstrakcji, konkretnie to do random user service - zacznij od tego nastepnym razem
+trzeba wyczyscic uzywanie active w session i session service i ustawiac tylko na najwyzszym poziomie
+
+przebuduj to po prostu, ma byc User i GamePLayer
+User odpowiedzialny za:
+- czy mozna dodac do gry
+- czy mozna usunac z sesji
+- czy moze stworzyc gre
+- po prostu czy teraz gra
+- czy siedzi w jakim pokoju jak tak to w jakim
+
+GamePlayer odpowiedzialny za:
+czy odpowiedzial na wszystkie pytania
+czy chce wyjsc
+ile ma pytan do konca
+
+jesli chce wyjsc to: wypierdol gameplayer z sesji, zmien statu usera na notplaying
+
+naprawic register, ma uzywac principal id
+

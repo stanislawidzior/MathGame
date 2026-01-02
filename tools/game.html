@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Game Rooms</title>
+</head>
+<body>
+
+<h2>Status: <span id="status">disconnected</span></h2>
+
+<!-- Connection -->
+<input id="wsUrl" placeholder="localhost:8080/ws" />
+<button id="connect">Connect</button>
+
+<hr>
+
+<!-- Register -->
+<input id="username" placeholder="username" />
+<button id="register">Register</button>
+<p>Player ID: <span id="playerId"></span></p>
+
+<hr>
+
+<!-- Rooms -->
+<button id="loadRooms">Load rooms</button>
+<ul id="rooms"></ul>
+
+<hr>
+
+<!-- Create room -->
+<button id="createRoom">Create room</button>
+
+<hr>
+
+<!-- Join room -->
+<input id="roomId" placeholder="room id" />
+<button id="joinRoom">Join room</button>
+
+<hr>
+
+<h3>Messages</h3>
+<pre id="messages"></pre>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js">   </script>
+<script src="stomp.js"></script>
+<script src="game.js"></script>
+
+</body>
+</html>

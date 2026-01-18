@@ -1,4 +1,4 @@
-// ==== DOM elements ====
+
 const wsUrlInput = document.getElementById("url");
 const connectBtn = document.getElementById("connect");
 const disconnectBtn = document.getElementById("disconnect");
@@ -13,11 +13,9 @@ const receivedMessages = document.getElementById("receivedMessages");
 const errorsField = document.getElementById("errors");
 const statusField = document.getElementById("status");
 
-// ==== STOMP state ====
 let stompClient = null;
 let subscription = null;
 
-// ==== Helpers ====
 function setStatus(text) {
     statusField.innerText = text;
 }
@@ -31,7 +29,6 @@ function showError(err) {
     errorsField.innerText = msg;
 }
 
-// ==== STOMP callbacks ====
 function onConnect() {
     setStatus("connected");
 }
@@ -49,7 +46,7 @@ function onMessage(message) {
     }
 }
 
-// ==== Actions ====
+
 function connectWS(event) {
     event.preventDefault();
 

@@ -5,69 +5,68 @@ import com.stanislawidzior.personal.mathgame.game.exception.*;
 import com.stanislawidzior.personal.mathgame.game.model.GameUser;
 import org.springframework.stereotype.Service;
 
-import java.security.Principal;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class GameUserService {
-    private ConcurrentHashMap<String, GameUser> userBySession = new ConcurrentHashMap<>();
     private ConcurrentHashMap<UUID, GameUser> userById = new ConcurrentHashMap<>();
+    private ConcurrentHashMap<UUID, GameUser> disconnectedUsers = new ConcurrentHashMap<>();
 
 
 
-
-    public String setNewGuestUserIdentifierReturnId(GameUser user) throws UserAlreadyExistsException {
+    public String setNewGuestUserIdReturnId(GameUser user) throws UserAlreadyExistsException {
         var id = UUID.randomUUID();
         user.setUserId(id);
-        userById.putIfAbsent(id,user);
-
+        if(userById.putIfAbsent(id,user) != null){
+            throw new UserAlreadyExistsException();
+        }
         return id.toString();
     }
-    public String recoverUserSession(Principal principal) throws UserNotFoundException {
-        var user = getAppUserBySessionId(principal.getName());
-        return user.getSessionId();
+    public boolean existsUserById(UUID id) {
+        return userById.containsKey(id);
     }
-    public GameUser getAppUserBySessionId(String sessionId) throws UserNotFoundException {
-        var user = userBySession.get(sessionId);
+    public void registerOrRecoverGameUserSession(String gameUserId, String wsSessionId) throws UserNotFoundException {
+        var user = disconnectedUsers.get(gameUserId);
         if(user == null){
-            throw new UserNotFoundException();
+            user.setSessionId(wsSessionId);
+            userById.put(UUID.fromString(gameUserId),user);
+        }else{
+            user.setSessionId(wsSessionId);
         }
-        return user;
-
     }
-    public GameUser getAppUserByUserId(UUID userId) throws UserNotFoundException{
+    public GameUser getGameUserByUUID(UUID userId) throws UserNotFoundException {
         var user = userById.get(userId);
         if(user == null){
             throw new UserNotFoundException();
         }
         return user;
     }
-    public GameUser requireFreeUserBySession(String sessionId) throws UserNotFoundException, UserAlreadyInGameException {
-        GameUser user = getAppUserBySessionId(sessionId);
+    public GameUser requireFreeGameUserById(String userId) throws UserNotFoundException, UserAlreadyInGameException {
+        GameUser user = getGameUserByUUID(UUID.fromString(userId));
         if (user.isInGame()) {
             throw new UserAlreadyInGameException();
         }
         return user;
     }
-    public GameUser requireOccupiedUserBySession(String sessionId) throws UserNotInGameException, UserNotFoundException {
-        var user = getAppUserBySessionId(sessionId);
+    public GameUser requireOccupiedUserById(String userId) throws UserNotInGameException, UserNotFoundException {
+        var user = getGameUserByUUID(UUID.fromString(userId));
         if(!user.isInGame()){
             throw new UserNotInGameException();
         }
         return user;
     }
-    public void removeGamePlayerFromSession(String sessionId) throws GamePlayerNotFoundException{
-        var removed = userBySession.remove(sessionId);
-        if(removed == null){
-            throw new GamePlayerNotFoundException();
+    public void removeGamePlayerSession(String userId) throws UserNotFoundException {
+        var user = getGameUserByUUID(UUID.fromString(userId));
+        if(user.isInGame()){
+            disconnectedUsers.put(user.getUserId(),user);
         }
+        userById.remove(UUID.fromString(userId));
     }
-    public void setUserActiveRoomFromSession(String sessionId, String roomId) throws UserNotFoundException {
-        var user = getAppUserBySessionId(sessionId);
+    public void setUserActiveRoomFromSession(String userId, String roomId) throws UserNotFoundException {
+        var user = getGameUserByUUID(UUID.fromString(userId));
         user.setInGame(true);
         user.setGameRoomId(roomId);
-
 
     }
 

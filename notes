@@ -42,3 +42,31 @@ jesli chce wyjsc to: wypierdol gameplayer z sesji, zmien statu usera na notplayi
 
 naprawic register, ma uzywac principal id
 
+
+gosc uzywa init-quest dostaje swoje id
+
+kiedy laczy sie z ws istnieje
+
+
+uzytkownik zalogowany nie podaje id bo ma juz swoje id zwiazane ze swoja sesja http autoryzowana
+
+co potrzebuje? potrzebuje na nowo przyznac dostep do uzytknik po sesji ws
+
+a wiec gameplayer -> wssession powinno zostac
+po utraceniu sesji przenoszę gameplayer -> wssession do uuid -> gameplayer
+
+po polaczeniu z ws sprawdzam czy to uuid istnieje w uuid -> gameplayer
+
+sa dwa rodzaje gameplayer quesplayer i authplayer
+
+questplayer zwraca jako swoje id id authplayer zwraca po prostu siebie
+
+po handshaku user znajduje się a argumentach
+
+potrzebuje uzyc ich raz, po polaczeniu czyli onConnected -> tam sprawdzam czy uzytkownik jest w mapie rozłączonych
+jesli to dodaje do do sessionid->user
+za kazdym razem jak disconnected, to usuwam uzytkownika z sessionid -> user. aczkolwiek potrzbuje danych, ale one beda
+bo beda w disconnected zapisane. ale czy zmiany będą propagowane?
+
+
+

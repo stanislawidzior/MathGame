@@ -3,8 +3,11 @@ package com.stanislawidzior.personal.mathgame.game.ws.config;
 import com.stanislawidzior.personal.mathgame.game.service.GameUserService;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.EventListener;
+import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.messaging.SessionConnectEvent;
+import org.springframework.web.socket.messaging.SessionConnectedEvent;
 import org.springframework.web.socket.messaging.SessionDisconnectEvent;
 import org.springframework.web.socket.messaging.SessionSubscribeEvent;
 
@@ -24,11 +27,16 @@ public class SubscribeListener implements ApplicationListener<SessionSubscribeEv
     public void onApplicationEvent(SessionSubscribeEvent event) {
         messagingTemplate.convertAndSend("/game/room", "Hello");
     }
+    @EventListener
+    public void onConnected(SessionConnectedEvent event) throws Exception {
+        SimpMessageHeaderAccessor headers = SimpMessageHeaderAccessor.wrap(event.getMessage());
+        randomUserService.registerOrRecoverGameUserSession((String)headers.getSessionAttributes().get("userId"), headers.getSessionId());
+    }
 
     @EventListener
     public void onDisconnect(SessionDisconnectEvent event) {
         try {
-            randomUserService.removeGamePlayerFromSession(event.getSessionId());
+            randomUserService.removeGamePlayerSession(event.getSessionId());
         } catch (Exception e) {
             e.printStackTrace();
         }
